@@ -14,9 +14,11 @@
         <Grid.DataContext>
                 <local:UserSettingsViewModel/>
             </Grid.DataContext>
-            <StackPanel DataContext="{Binding Path=Settings, Mode=TwoWay}">
-                <CheckBox IsChecked="{Binding Path=OpenURLOnUpload, Converter={StaticResource DebugConverter}}" Content="Open URL on upload"/>
-                <CheckBox IsChecked="{Binding Path=CopyURLOnUpload}" Content="Copy URL to clipboard on upload"/>
-            </StackPanel>
+        <StackPanel DataContext="{Binding Path=Settings, Mode=TwoWay}">
+            <CheckBox IsChecked="{Binding Path=OpenURLOnUpload}" Content="Open URL on upload"/>
+            <CheckBox IsChecked="{Binding Path=CopyURLOnUpload}" Content="Copy URL to clipboard on upload"/>
+            <TextBlock Text="Default Language"/>
+            <ComboBox x:Name="cboLangs" SelectionChanged="cboLangs_SelectionChanged"/>
+        </StackPanel>
         </Grid>
 </UserControl>

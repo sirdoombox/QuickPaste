@@ -73,10 +73,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="src\Data\PasteHistory.cs" />
+    <Compile Include="src\Data\PasteHistoryViewModel.cs" />
     <Compile Include="src\Data\UserSettings.cs" />
     <Compile Include="src\Data\UserSettingsViewModel.cs" />
     <Compile Include="src\DebugConverter.cs" />
     <Compile Include="src\LowLevelKeyboardListener.cs" />
+    <Page Include="src\Views\PasteHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="src\Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -91,6 +97,9 @@
     </Compile>
     <Compile Include="src\Misc\LangWindowPosition.cs" />
     <Compile Include="src\Misc\StaticVars.cs" />
+    <Compile Include="src\Views\PasteHistoryView.xaml.cs">
+      <DependentUpon>PasteHistoryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="src\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>

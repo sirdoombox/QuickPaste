@@ -80,8 +80,6 @@ namespace QuickPaste
             }
         }
 
-        public ObservableCollection<string> PasteHistoryURL { get; set; }
-
         private static bool DirExists { get { return Directory.Exists(StaticVars.SettingsDir); } }
         private static bool FileExists { get { return File.Exists(StaticVars.SettingsFile); } }
 

@@ -10,6 +10,13 @@ namespace QuickPaste
         public SettingsView()
         {
             InitializeComponent();
+            foreach (var item in StaticVars.AvailableLanguages)
+                cboLangs.Items.Add(item.Key);
+        }
+
+        private void cboLangs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
