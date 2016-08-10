@@ -94,7 +94,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="src\Misc\LangWindowPosition.cs" />
     <Compile Include="src\Misc\StaticVars.cs" />
     <Compile Include="src\Views\PasteHistoryView.xaml.cs">
       <DependentUpon>PasteHistoryView.xaml</DependentUpon>
