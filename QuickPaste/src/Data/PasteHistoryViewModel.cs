@@ -13,6 +13,7 @@ namespace QuickPaste
         public PasteHistoryViewModel()
         {
             History = new PasteHistory();
+            MainWindow.PasteHistory = History;
         }
     }
 }

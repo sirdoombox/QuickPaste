@@ -10,6 +10,20 @@ namespace QuickPaste
 {
     public class UserSettings : INotifyPropertyChanged
     {
+        private bool _minimisetosystemtray;
+        public bool MinimiseToSystemTray
+        {
+            get
+            {
+                return _minimisetosystemtray;
+            }
+            set
+            {
+                _minimisetosystemtray = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private bool _openurlonupload;
         public bool OpenURLOnUpload
         {

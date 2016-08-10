@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace QuickPaste
 {
-    class LowLevelKeyboardListener
+    class GlobalKeyboardHook
     {
 
         private const int WH_KEYBOARD_LL = 13;
@@ -32,7 +32,7 @@ namespace QuickPaste
         private LowLevelKeyboardProc _proc;
         private IntPtr _hookID = IntPtr.Zero;
 
-        public LowLevelKeyboardListener()
+        public GlobalKeyboardHook()
         {
             _proc = HookCallback;
         }
