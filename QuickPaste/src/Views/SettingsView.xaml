@@ -6,19 +6,27 @@
              xmlns:local="clr-namespace:QuickPaste"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-
     <Grid Margin="10">
-        <Grid.Resources>
-            <local:DebugConverter x:Key="DebugConverter" />
-        </Grid.Resources>
         <Grid.DataContext>
                 <local:UserSettingsViewModel/>
-            </Grid.DataContext>
+        </Grid.DataContext>
         <StackPanel DataContext="{Binding Path=Settings, Mode=TwoWay}">
-            <CheckBox IsChecked="{Binding Path=OpenURLOnUpload}" Content="Open URL on upload"/>
-            <CheckBox IsChecked="{Binding Path=CopyURLOnUpload}" Content="Copy URL to clipboard on upload"/>
-            <TextBlock Text="Default Language"/>
-            <ComboBox x:Name="cboLangs" SelectionChanged="cboLangs_SelectionChanged"/>
+            <CheckBox IsChecked="{Binding Path=OpenURLOnUpload}" 
+                      Content="Open URL on upload"/>
+            <CheckBox IsChecked="{Binding Path=CopyURLOnUpload}" 
+                      Content="Copy URL to clipboard on upload"/>
+            <TextBlock Text="Default Language"
+                       HorizontalAlignment="Center"/>
+            <ComboBox x:Name="cboLangs" 
+                      SelectedValue="{Binding Path=DefaultLanguage}" 
+                      SelectedValuePath="Value"
+                      DisplayMemberPath="Key"/>
+            <CheckBox IsChecked="{Binding Path=ShowLanguageWindow}"
+                      Content="Show Languge Window? (If this is set to false your default language will be used)"/>
+            <ComboBox x:Name="cboWinPos"
+                      SelectedValue="{Binding Path=WindowPosition}"
+                      SelectedValuePath="Value"
+                      DisplayMemberPath="Key"/>
         </StackPanel>
-        </Grid>
+    </Grid>
 </UserControl>

@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Linq;
+using System.Windows.Controls;
 
 namespace QuickPaste
 {
@@ -10,13 +12,8 @@ namespace QuickPaste
         public SettingsView()
         {
             InitializeComponent();
-            foreach (var item in StaticVars.AvailableLanguages)
-                cboLangs.Items.Add(item.Key);
-        }
-
-        private void cboLangs_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            cboLangs.ItemsSource = StaticVars.AvailableLanguages;;
+            cboWinPos.ItemsSource = StaticVars.WindowPositions;
         }
     }
 }
