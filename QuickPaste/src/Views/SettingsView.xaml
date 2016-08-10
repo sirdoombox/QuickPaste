@@ -21,12 +21,6 @@
                       SelectedValue="{Binding Path=DefaultLanguage}" 
                       SelectedValuePath="Value"
                       DisplayMemberPath="Key"/>
-            <CheckBox IsChecked="{Binding Path=ShowLanguageWindow}"
-                      Content="Show Languge Window? (If this is set to false your default language will be used)"/>
-            <ComboBox x:Name="cboWinPos"
-                      SelectedValue="{Binding Path=WindowPosition}"
-                      SelectedValuePath="Value"
-                      DisplayMemberPath="Key"/>
         </StackPanel>
     </Grid>
 </UserControl>

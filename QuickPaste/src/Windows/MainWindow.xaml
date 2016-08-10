@@ -10,7 +10,14 @@
                       Title="QuickPaste" Height="350" Width="525" StateChanged="MetroWindow_StateChanged">
     
     <StackPanel>
-        <local:SettingsView/>
+        <Controls:MetroAnimatedSingleRowTabControl>
+            <TabItem Header="History">
+                <local:PasteHistoryView/>
+            </TabItem>
+            <TabItem Header="Settings">
+                <local:SettingsView/>
+            </TabItem>
+        </Controls:MetroAnimatedSingleRowTabControl>
         <tb:TaskbarIcon x:Name="sysTrayIcon" 
                         Visibility="Collapsed"
                         TrayLeftMouseDown="sysTrayIcon_TrayLeftMouseDown"/>

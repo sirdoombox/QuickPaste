@@ -13,7 +13,6 @@ namespace QuickPaste
         {
             InitializeComponent();
             cboLangs.ItemsSource = StaticVars.AvailableLanguages;;
-            cboWinPos.ItemsSource = StaticVars.WindowPositions;
         }
     }
 }

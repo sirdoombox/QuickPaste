@@ -52,42 +52,14 @@ namespace QuickPaste
             }
         }
 
-        private bool _showlanguagewindow;
-        public bool ShowLanguageWindow
-        {
-            get
-            {
-                return _showlanguagewindow;
-            }
-            set
-            {
-                _showlanguagewindow = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private LangWindowPosition _windowposition;
-        public LangWindowPosition WindowPosition
-        {
-            get
-            {
-                return _windowposition;
-            }
-            set
-            {
-                _windowposition = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private static bool DirExists { get { return Directory.Exists(StaticVars.SettingsDir); } }
+        private static bool DirExists { get { return Directory.Exists(StaticVars.ProfileDir); } }
         private static bool FileExists { get { return File.Exists(StaticVars.SettingsFile); } }
 
         public static UserSettings LoadUserSettings()
         {
             if ( !DirExists || !FileExists )
             {
-                Directory.CreateDirectory(StaticVars.SettingsDir);
+                Directory.CreateDirectory(StaticVars.ProfileDir);
                 return new UserSettings();
             }
             using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(StaticVars.SettingsFile)))
@@ -100,7 +72,7 @@ namespace QuickPaste
         public void SaveUserSettings()
         {
             if (!DirExists)
-                Directory.CreateDirectory(StaticVars.SettingsDir);
+                Directory.CreateDirectory(StaticVars.ProfileDir);
             using (BinaryWriter bw = new BinaryWriter(File.Open(StaticVars.SettingsFile, FileMode.Create)))
             using (BsonWriter br = new BsonWriter(bw))
             {

@@ -77,8 +77,7 @@
     <Compile Include="src\Data\PasteHistoryViewModel.cs" />
     <Compile Include="src\Data\UserSettings.cs" />
     <Compile Include="src\Data\UserSettingsViewModel.cs" />
-    <Compile Include="src\DebugConverter.cs" />
-    <Compile Include="src\LowLevelKeyboardListener.cs" />
+    <Compile Include="src\Misc\LowLevelKeyboardListener.cs" />
     <Page Include="src\Views\PasteHistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

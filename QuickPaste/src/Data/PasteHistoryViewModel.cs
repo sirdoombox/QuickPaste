@@ -4,9 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuickPaste.src.Data
+namespace QuickPaste
 {
-    class PasteHistoryViewModel
+    public class PasteHistoryViewModel
     {
+        public PasteHistory History { get; set; }
+
+        public PasteHistoryViewModel()
+        {
+            History = new PasteHistory();
+        }
     }
 }
