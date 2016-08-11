@@ -41,6 +41,7 @@ namespace QuickPaste
                 return;
             byte[] bytes = new ASCIIEncoding().GetBytes(clipText);
             var req = System.Net.WebRequest.Create("http://hastebin.com/documents");
+            req.Timeout = 20000;
             req.Method = "POST";
             req.ContentType = "text/plain";
             req.ContentLength = bytes.Length;
@@ -48,16 +49,33 @@ namespace QuickPaste
             {
                 reqStream.Write(bytes, 0, bytes.Length);
             }
-            using (var resp = req.GetResponse())
+            try
             {
-                Dictionary<string, string> hr = JsonConvert.DeserializeObject<Dictionary<string, string>>(new StreamReader(resp.GetResponseStream()).ReadToEnd());
-                string url = $"http://hastebin.com/{hr["key"]}.{UserSettings.DefaultLanguage}";
-                if (UserSettings.OpenURLOnUpload)
-                    System.Diagnostics.Process.Start(url);
-                if (UserSettings.CopyURLOnUpload)
-                    Clipboard.SetText(url);
-                PasteHistory.AddPaste(url);
+                using (var resp = req.GetResponse())
+                {
+                    Dictionary<string, string> hr = JsonConvert.DeserializeObject<Dictionary<string, string>>(new StreamReader(resp.GetResponseStream()).ReadToEnd());
+                    string url = $"http://hastebin.com/{hr["key"]}.{UserSettings.DefaultLanguage}";
+                    if (UserSettings.OpenURLOnUpload)
+                        System.Diagnostics.Process.Start(url);
+                    if (UserSettings.CopyURLOnUpload)
+                        Clipboard.SetText(url);
+                    PasteHistory.AddPaste(url);
+                    if(UserSettings.DisplayNotifications) ShowNotificationWindow("Paste Succesful", "Your paste was succesfully uploaded to Hastebin.", url);
+                }
             }
+            catch
+            {
+                if (UserSettings.DisplayNotifications) ShowNotificationWindow("Paste Failed", "Unable To Connect To Hastebin.", "");
+            }
+        }
+
+        public static void ShowNotificationWindow(string title, string l1, string l2)
+        {
+            Window notif = new NotificationWindow(title,l1,l2);
+            var desktopWorkingArea = SystemParameters.WorkArea;
+            notif.Left = desktopWorkingArea.Right - notif.Width;
+            notif.Top = desktopWorkingArea.Bottom - notif.Height;
+            notif.Visibility = Visibility.Visible;
         }
 
         #region Window Minimise Implementation

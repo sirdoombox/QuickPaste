@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:local="clr-namespace:QuickPaste"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -10,19 +11,27 @@
         <Grid.DataContext>
             <local:PasteHistoryViewModel/>
         </Grid.DataContext>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
         <Grid DataContext="{Binding Path=History, Mode=TwoWay}">
             <ListBox ItemsSource="{Binding Path=Pastes}" MouseDoubleClick="ListBox_MouseDoubleClick">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
-                            <TextBlock Text="{Binding Path=PasteURL}"
-                                        HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Path=PastedAt}"
-                                        HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding Path=PasteURL}" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding Path=PastedAt}" HorizontalAlignment="Left"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" 
+                Grid.Row="1"
+                Content="Clear History"
+                Command="{Binding Path=ClearCommand}"
+                CommandParameter="{Binding Path=History}"
+                Controls:ButtonHelper.PreserveTextCase="True"/>
     </Grid>
 </UserControl>

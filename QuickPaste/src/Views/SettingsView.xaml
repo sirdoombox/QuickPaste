@@ -24,6 +24,8 @@
                       Content="Open URL on upload"/>
             <CheckBox IsChecked="{Binding Path=CopyURLOnUpload}" 
                       Content="Copy URL to clipboard on upload"/>
+            <CheckBox IsChecked="{Binding Path=DisplayNotifications}"
+                      Content="Show post-upload notifications"/>
             <TextBlock Text="Default Language"
                        HorizontalAlignment="Center"/>
             <ComboBox x:Name="cboLangs" 

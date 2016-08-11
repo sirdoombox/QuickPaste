@@ -1,9 +1,5 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Bson;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using Microsoft.Win32;
 using System.ComponentModel;
-using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace QuickPaste
@@ -81,6 +77,20 @@ namespace QuickPaste
             }
         }
 
+        private bool _displaynotification;
+        public bool DisplayNotifications
+        {
+            get
+            {
+                return _displaynotification;
+            }
+            set
+            {
+                _displaynotification = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private string _defaultlanguage;
         public string DefaultLanguage
         {
@@ -103,7 +113,11 @@ namespace QuickPaste
 
         void RegisterStartup(bool value)
         {
-
+            RegistryKey regKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if (value)
+                regKey.SetValue("QuickPaste", System.Reflection.Assembly.GetExecutingAssembly().Location);
+            else
+                regKey.DeleteValue("QuickPaste");
         }
 
         #region NotifyImplementation

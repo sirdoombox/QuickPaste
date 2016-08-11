@@ -74,11 +74,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="src\Converters\HotkeyStringToHotkeyCombinationConverter.cs" />
+    <Compile Include="src\Data\PasteHistory\ClearHistoryCommand.cs" />
     <Compile Include="src\Data\PasteHistory\PasteHistory.cs" />
     <Compile Include="src\Data\PasteHistory\PasteHistoryViewModel.cs" />
     <Compile Include="src\Data\UserSettings\UserSettings.cs" />
     <Compile Include="src\Data\UserSettings\UserSettingsViewModel.cs" />
     <Compile Include="src\Misc\GlobalKeyboardHook.cs" />
+    <Compile Include="src\Windows\NotificationWindow.xaml.cs">
+      <DependentUpon>NotificationWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="src\Views\PasteHistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -108,6 +112,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="src\Windows\NotificationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
