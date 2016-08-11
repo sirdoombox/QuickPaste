@@ -29,19 +29,14 @@ namespace QuickPaste
             string val = value as string;
             if (string.IsNullOrEmpty(val))
                 return string.Empty;
-
             string[] vals = val.Split('+');
-            string key = vals.Last();
-            bool hasCtrl = false;
-            bool hasShift = false;
-            bool hasAlt = false;
-            if (vals.Any(x => string.Compare(x, "Ctrl", true) == 0))
-                hasCtrl = true;
-            if (vals.Any(x => string.Compare(x, "Shift", true) == 0))
-                hasShift = true;
-            if (vals.Any(x => string.Compare(x, "Alt", true) == 0))
-                hasAlt = true;
-            return new HotkeyCombination(hasCtrl, hasShift, hasAlt, key);
+            return new HotkeyCombination
+                (
+                    vals.Any(x => string.Compare(x, "Ctrl", true) == 0),
+                    vals.Any(x => string.Compare(x, "Shift", true) == 0),
+                    vals.Any(x => string.Compare(x, "Alt", true) == 0),
+                    vals.Last()
+                );
         }
     }
 }

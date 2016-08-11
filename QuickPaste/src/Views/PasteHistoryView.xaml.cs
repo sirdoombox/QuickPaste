@@ -15,7 +15,7 @@ namespace QuickPaste
             if(lb?.SelectedValue != null)
             {
                 var paste = lb.SelectedValue as Paste;
-                System.Diagnostics.Process.Start(paste.PasteURL);
+                System.Diagnostics.Process.Start(paste?.PasteURL);
             }
         }
     }

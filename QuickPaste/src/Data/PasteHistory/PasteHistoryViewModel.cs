@@ -12,7 +12,8 @@ namespace QuickPaste
 
         public PasteHistoryViewModel()
         {
-            History = PasteHistory.LoadPasteHistory();
+            History = UserData.Load<PasteHistory>(UserData.HistoryFile);
+            History.Init();
             MainWindow.PasteHistory = History;
         }
     }

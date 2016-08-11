@@ -24,6 +24,21 @@ namespace QuickPaste
             }
         }
 
+        private bool _openonwindowsstart;
+        public bool OpenOnWindowsStart
+        {
+            get
+            {
+                return _openonwindowsstart;
+            }
+            set
+            {
+                _openonwindowsstart = value;
+                RegisterStartup(value);
+                NotifyPropertyChanged();
+            }
+        }
+
         private HotkeyCombination _hotkeycombination;
         public HotkeyCombination HotkeyCombination
         {
@@ -80,38 +95,15 @@ namespace QuickPaste
             }
         }
 
-        private static bool DirExists { get { return Directory.Exists(StaticVars.ProfileDir); } }
-        private static bool FileExists { get { return File.Exists(StaticVars.SettingsFile); } }
-
         public UserSettings()
         {
             HotkeyCombination = new HotkeyCombination(true, true, false, "L");
             DefaultLanguage = "txt";
         }
 
-        public static UserSettings LoadUserSettings()
+        void RegisterStartup(bool value)
         {
-            if ( !DirExists || !FileExists )
-            {
-                Directory.CreateDirectory(StaticVars.ProfileDir);
-                return new UserSettings();
-            }
-            using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(StaticVars.SettingsFile)))
-            using (BsonReader br = new BsonReader(ms))
-            {
-                    return new JsonSerializer().Deserialize<UserSettings>(br);
-            }
-        }
 
-        public void SaveUserSettings()
-        {
-            if (!DirExists)
-                Directory.CreateDirectory(StaticVars.ProfileDir);
-            using (BinaryWriter bw = new BinaryWriter(File.Open(StaticVars.SettingsFile, FileMode.Create)))
-            using (BsonWriter br = new BsonWriter(bw))
-            {
-                new JsonSerializer().Serialize(br, this);
-            }
         }
 
         #region NotifyImplementation
@@ -119,7 +111,7 @@ namespace QuickPaste
         private void NotifyPropertyChanged([CallerMemberName] string p = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
-            SaveUserSettings();
+            this.Save(UserData.SettingsFile);
         }
         #endregion
     }

@@ -6,7 +6,7 @@
 
         public UserSettingsViewModel()
         {
-            Settings = UserSettings.LoadUserSettings();
+            Settings = UserData.Load<UserSettings>(UserData.SettingsFile);
             MainWindow.UserSettings = Settings;
         }
     }

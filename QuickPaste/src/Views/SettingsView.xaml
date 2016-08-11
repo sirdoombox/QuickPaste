@@ -16,6 +16,8 @@
         <StackPanel DataContext="{Binding Path=Settings, Mode=TwoWay}">
             <CheckBox IsChecked="{Binding Path=MinimiseToSystemTray}"
                       Content="Minimise to system tray"/>
+            <CheckBox IsChecked="{Binding Path=OpenOnWindowsStart}"
+                      Content="Open on Windows Startup?"/>
             <TextBox PreviewKeyDown="TextBox_PreviewKeyDown"
                      Text="{Binding Path=HotkeyCombination, Converter={StaticResource hotkeyConverter}}"/>
             <CheckBox IsChecked="{Binding Path=OpenURLOnUpload}" 
