@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Input;
 
 namespace QuickPaste
 {
     public static class StaticVars
     {
-        public static string ProfileDir;
-        public static string SettingsFile;
-        public static string HistoryFile;
-
-        public static Dictionary<string, string> AvailableLanguages;
-
         static StaticVars()
         {
             ProfileDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "QuickPaste");
@@ -29,5 +24,36 @@ namespace QuickPaste
                 { "XML", "xml" }
             };
         }
+
+        public static string ProfileDir;
+        public static string SettingsFile;
+        public static string HistoryFile;
+
+        public static Dictionary<string, string> AvailableLanguages;
+
+        #region Modifier Key Info
+        public static bool AltIsDown
+        {
+            get
+            {
+                return ((Keyboard.Modifiers & (ModifierKeys.Alt)) == (ModifierKeys.Alt));
+            }
+        }
+        public static bool CtrlIsDown
+        {
+            get
+            {
+                return ((Keyboard.Modifiers & (ModifierKeys.Control)) == (ModifierKeys.Control));
+            }
+        }
+
+        public static bool ShiftIsDown
+        {
+            get
+            {
+                return ((Keyboard.Modifiers & (ModifierKeys.Shift)) == (ModifierKeys.Shift));
+            }
+        }
+        #endregion
     }
 }

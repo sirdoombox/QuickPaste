@@ -10,9 +10,14 @@
         <Grid.DataContext>
                 <local:UserSettingsViewModel/>
         </Grid.DataContext>
+        <Grid.Resources>
+            <local:HotkeyStringToHotkeyCombinationConverter x:Key="hotkeyConverter"/>
+        </Grid.Resources>
         <StackPanel DataContext="{Binding Path=Settings, Mode=TwoWay}">
             <CheckBox IsChecked="{Binding Path=MinimiseToSystemTray}"
                       Content="Minimise to system tray"/>
+            <TextBox PreviewKeyDown="TextBox_PreviewKeyDown"
+                     Text="{Binding Path=HotkeyCombination, Converter={StaticResource hotkeyConverter}}"/>
             <CheckBox IsChecked="{Binding Path=OpenURLOnUpload}" 
                       Content="Open URL on upload"/>
             <CheckBox IsChecked="{Binding Path=CopyURLOnUpload}" 

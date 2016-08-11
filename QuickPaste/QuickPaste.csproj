@@ -73,10 +73,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="src\Data\PasteHistory.cs" />
-    <Compile Include="src\Data\PasteHistoryViewModel.cs" />
-    <Compile Include="src\Data\UserSettings.cs" />
-    <Compile Include="src\Data\UserSettingsViewModel.cs" />
+    <Compile Include="src\Converters\HotkeyStringToHotkeyCombinationConverter.cs" />
+    <Compile Include="src\Data\PasteHistory\PasteHistory.cs" />
+    <Compile Include="src\Data\PasteHistory\PasteHistoryViewModel.cs" />
+    <Compile Include="src\Data\UserSettings\UserSettings.cs" />
+    <Compile Include="src\Data\UserSettings\UserSettingsViewModel.cs" />
     <Compile Include="src\Misc\GlobalKeyboardHook.cs" />
     <Page Include="src\Views\PasteHistoryView.xaml">
       <SubType>Designer</SubType>
@@ -94,6 +95,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\Misc\HotkeyCombination.cs" />
     <Compile Include="src\Misc\StaticVars.cs" />
     <Compile Include="src\Views\PasteHistoryView.xaml.cs">
       <DependentUpon>PasteHistoryView.xaml</DependentUpon>

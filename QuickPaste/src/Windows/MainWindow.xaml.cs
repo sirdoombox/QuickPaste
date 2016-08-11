@@ -1,4 +1,9 @@
-﻿using System.Windows;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QuickPaste
@@ -21,16 +26,42 @@ namespace QuickPaste
             _keyboardHook.OnKeyPressed += KeyboardHook_OnKeyPressed;
         }
 
-        bool altIsDown { get { return ((Keyboard.Modifiers & (ModifierKeys.Alt)) == (ModifierKeys.Alt)); } }
-        bool ctrlIsDown { get { return ((Keyboard.Modifiers & (ModifierKeys.Control)) == (ModifierKeys.Control)); } }
-        bool shiftIsDown { get { return ((Keyboard.Modifiers & (ModifierKeys.Shift)) == (ModifierKeys.Shift)); } }
         private void KeyboardHook_OnKeyPressed(object sender, KeyPressedArgs e)
         {
-            //if(altIsDown && ctrlIsDown && e.KeyPressed == Key.OemQuestion)
+            HotkeyCombination combo = UserSettings.HotkeyCombination;
+            Key key = (Key)Enum.Parse(typeof(Key), combo.Key);
+            if (StaticVars.CtrlIsDown == combo.UseCtrl && StaticVars.ShiftIsDown == combo.UseShift && StaticVars.AltIsDown == combo.UseAlt && e.KeyPressed == key)
+                Paste();
+        }
+
+        void Paste()
+        {
+            string clipText = Clipboard.GetText();
+            if (string.IsNullOrEmpty(clipText))
+                return;
+            byte[] bytes = new ASCIIEncoding().GetBytes(clipText);
+            var req = System.Net.WebRequest.Create("http://hastebin.com/documents");
+            req.Method = "POST";
+            req.ContentType = "text/plain";
+            req.ContentLength = bytes.Length;
+            using (var reqStream = req.GetRequestStream())
+            {
+                reqStream.Write(bytes, 0, bytes.Length);
+            }
+            using (var resp = req.GetResponse())
+            {
+                Dictionary<string, string> hr = JsonConvert.DeserializeObject<Dictionary<string, string>>(new StreamReader(resp.GetResponseStream()).ReadToEnd());
+                string url = $"http://hastebin.com/{hr["key"]}.{UserSettings.DefaultLanguage}";
+                if (UserSettings.OpenURLOnUpload)
+                    System.Diagnostics.Process.Start(url);
+                if (UserSettings.CopyURLOnUpload)
+                    Clipboard.SetText(url);
+                PasteHistory.AddPaste(url);
+            }
         }
 
         #region Window Minimise Implementation
-        private void MetroWindow_StateChanged(object sender, System.EventArgs e)
+        private void MetroWindow_StateChanged(object sender, EventArgs e)
         {
             if (WindowState == WindowState.Minimized && UserSettings.MinimiseToSystemTray)
             {

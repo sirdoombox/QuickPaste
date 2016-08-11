@@ -20,6 +20,12 @@ namespace QuickPaste
         public PasteHistory()
         {
             Pastes = new ObservableCollection<Paste>();
+            Pastes.CollectionChanged += Pastes_CollectionChanged; 
+        }
+
+        private void Pastes_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            SavePasteHistory();
         }
 
         public void AddPaste(string url)
@@ -27,7 +33,7 @@ namespace QuickPaste
             Pastes.Add(new Paste(url));
         }
 
-        public static PasteHistory LoadUserSettings()
+        public static PasteHistory LoadPasteHistory()
         {
             if (!DirExists || !FileExists)
             {
@@ -41,7 +47,7 @@ namespace QuickPaste
             }
         }
 
-        public void SaveUserSettings()
+        public void SavePasteHistory()
         {
             if (!DirExists)
                 Directory.CreateDirectory(StaticVars.ProfileDir);

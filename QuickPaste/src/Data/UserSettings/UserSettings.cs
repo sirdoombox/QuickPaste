@@ -24,6 +24,20 @@ namespace QuickPaste
             }
         }
 
+        private HotkeyCombination _hotkeycombination;
+        public HotkeyCombination HotkeyCombination
+        {
+            get
+            {
+                return _hotkeycombination;
+            }
+            set
+            {
+                _hotkeycombination = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private bool _openurlonupload;
         public bool OpenURLOnUpload
         {
@@ -68,6 +82,12 @@ namespace QuickPaste
 
         private static bool DirExists { get { return Directory.Exists(StaticVars.ProfileDir); } }
         private static bool FileExists { get { return File.Exists(StaticVars.SettingsFile); } }
+
+        public UserSettings()
+        {
+            HotkeyCombination = new HotkeyCombination(true, true, false, "L");
+            DefaultLanguage = "txt";
+        }
 
         public static UserSettings LoadUserSettings()
         {
