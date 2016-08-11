@@ -20,8 +20,18 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
-                            <TextBlock Text="{Binding Path=PasteURL}" HorizontalAlignment="Right"/>
-                            <TextBlock Text="{Binding Path=PastedAt}" HorizontalAlignment="Left"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Path=PasteURL}" 
+                                       HorizontalAlignment="Right" 
+                                       Grid.Column="1" 
+                                       TextWrapping="NoWrap" 
+                                       TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Text="{Binding Path=PastedAt}" 
+                                       HorizontalAlignment="Left" 
+                                       Grid.Column="0"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

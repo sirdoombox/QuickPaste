@@ -14,7 +14,7 @@ namespace QuickPaste
         public SettingsView()
         {
             InitializeComponent();
-            cboLangs.ItemsSource = StaticVars.AvailableLanguages;;
+            cboLangs.ItemsSource = AvailableLanguages.LangDict;
         }
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)

@@ -5,29 +5,8 @@ using System.Windows.Input;
 
 namespace QuickPaste
 {
-    public static class StaticVars
+    public static class ModifierKeyInfo
     {
-        static StaticVars()
-        {
-            
-
-            // I have to manually add these because there's no concrete documentation on Hastebin's syntax highlighting extensions.
-            AvailableLanguages = new Dictionary<string, string>
-            {
-                { "C#", "cs" },
-                { "C++", "cpp" },
-                { "JavaScript", "js" },
-                { "JSON", "json" },
-                { "Plain Text", "txt" },
-                { "XML", "xml" }
-            };
-        }
-
-
-
-        public static Dictionary<string, string> AvailableLanguages;
-
-        #region Modifier Key Info
         public static bool AltIsDown
         {
             get
@@ -50,6 +29,5 @@ namespace QuickPaste
                 return ((Keyboard.Modifiers & (ModifierKeys.Shift)) == (ModifierKeys.Shift));
             }
         }
-        #endregion
     }
 }

@@ -109,24 +109,24 @@ namespace QuickPaste
         {
             HotkeyCombination = new HotkeyCombination(true, true, false, "L");
             DefaultLanguage = "txt";
+            DisplayNotifications = true;
         }
 
         void RegisterStartup(bool value)
         {
-            RegistryKey regKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            var regKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
             if (value)
                 regKey.SetValue("QuickPaste", System.Reflection.Assembly.GetExecutingAssembly().Location);
             else
-                regKey.DeleteValue("QuickPaste");
+                if (regKey.GetValue("QuickPaste") != null)
+                    regKey.DeleteValue("QuickPaste");         
         }
-
-        #region NotifyImplementation
+        
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string p = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
             this.Save(UserData.SettingsFile);
         }
-        #endregion
     }
 }

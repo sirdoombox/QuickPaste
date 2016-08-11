@@ -30,7 +30,7 @@ namespace QuickPaste
         {
             HotkeyCombination combo = UserSettings.HotkeyCombination;
             Key key = (Key)Enum.Parse(typeof(Key), combo.Key);
-            if (StaticVars.CtrlIsDown == combo.UseCtrl && StaticVars.ShiftIsDown == combo.UseShift && StaticVars.AltIsDown == combo.UseAlt && e.KeyPressed == key)
+            if (ModifierKeyInfo.CtrlIsDown == combo.UseCtrl && ModifierKeyInfo.ShiftIsDown == combo.UseShift && ModifierKeyInfo.AltIsDown == combo.UseAlt && e.KeyPressed == key)
                 Paste();
         }
 
@@ -71,14 +71,16 @@ namespace QuickPaste
 
         public static void ShowNotificationWindow(string title, string l1, string l2)
         {
+            var s = System.Windows.Forms.Screen.FromPoint(new System.Drawing.Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y));
             Window notif = new NotificationWindow(title,l1,l2);
-            var desktopWorkingArea = SystemParameters.WorkArea;
+            var desktopWorkingArea = s.WorkingArea;
             notif.Left = desktopWorkingArea.Right - notif.Width;
             notif.Top = desktopWorkingArea.Bottom - notif.Height;
             notif.Visibility = Visibility.Visible;
+            notif.WindowState = WindowState.Normal;
+            notif.Topmost = true;
         }
-
-        #region Window Minimise Implementation
+        
         private void MetroWindow_StateChanged(object sender, EventArgs e)
         {
             if (WindowState == WindowState.Minimized && UserSettings.MinimiseToSystemTray)
@@ -101,6 +103,5 @@ namespace QuickPaste
             _keyboardHook.UnHookKeyboard();
             Application.Current.Shutdown();
         }
-        #endregion
     }
 }
