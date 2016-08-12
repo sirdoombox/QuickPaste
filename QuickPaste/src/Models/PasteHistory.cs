@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace QuickPaste
 {
@@ -17,7 +20,7 @@ namespace QuickPaste
             Pastes.CollectionChanged += Pastes_CollectionChanged;
         }
 
-        private void Pastes_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Pastes_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.Save(UserData.HistoryFile);
         }
@@ -25,18 +28,6 @@ namespace QuickPaste
         public void AddPaste(string url)
         {
             Pastes.Add(new Paste(url));
-        }
-    }
-
-    public class Paste
-    {
-        public DateTime PastedAt { get; set; }
-        public string PasteURL { get; set; }
-
-        public Paste(string url)
-        {
-            PasteURL = url;
-            PastedAt = DateTime.Now;
         }
     }
 }
