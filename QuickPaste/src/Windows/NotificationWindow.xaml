@@ -6,10 +6,10 @@
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:local="clr-namespace:QuickPaste"
                       mc:Ignorable="d"
-                      Height="125" Width="400" ShowTitleBar="False" ResizeMode="NoResize" Visibility="Collapsed" ShowCloseButton="False">
+                      Height="100" Width="400" ShowTitleBar="False" ResizeMode="NoResize" Visibility="Collapsed" ShowCloseButton="False">
     <StackPanel Margin="10" VerticalAlignment="Center">
-        <TextBlock x:Name="txtTitle" Text="Hello" FontWeight="Bold" FontSize="20"/>
-        <TextBlock x:Name="txtLine1" Text="Hello" FontSize="15"/>
-        <TextBlock x:Name="txtLine2" Text="Hello" FontStyle="Italic"  FontSize="15"/>
+        <TextBlock x:Name="txtTitle" Foreground="{DynamicResource AccentColorBrush}" Text="Hello" FontWeight="Bold" FontSize="20"/>
+        <TextBlock x:Name="txtLine1" Foreground="{DynamicResource AccentColorBrush2}" Text="Hello" FontSize="15"/>
+        <TextBlock x:Name="txtLine2" Foreground="{DynamicResource AccentColorBrush3}" Text="Hello" FontStyle="Italic"  FontSize="15"/>
     </StackPanel>
 </Controls:MetroWindow>

@@ -1,11 +1,14 @@
-﻿using System;
+﻿using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Windows.Input;
 
 namespace QuickPaste
 {
     class ClearHistoryCommand : ICommand
     {
+        #pragma warning disable 67
         public event EventHandler CanExecuteChanged;
+        #pragma warning restore
 
         public bool CanExecute(object parameter)
         {
@@ -15,7 +18,7 @@ namespace QuickPaste
         public void Execute(object parameter)
         {
             var ph = parameter as PasteHistory;
-            ph?.Pastes.Clear();
+            ph?.Pastes.Clear();            
         }
     }
 }

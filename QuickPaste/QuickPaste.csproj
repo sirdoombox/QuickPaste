@@ -78,6 +78,7 @@
     <Compile Include="src\Converters\HotkeyStringToHotkeyCombinationConverter.cs" />
     <Compile Include="src\Commands\ClearHistoryCommand.cs" />
     <Compile Include="src\Misc\AvailableLanguages.cs" />
+    <Compile Include="src\Misc\ThemeInfo.cs" />
     <Compile Include="src\Models\PasteHistory.cs" />
     <Compile Include="src\ViewModels\PasteHistoryViewModel.cs" />
     <Compile Include="src\Models\UserSettings.cs" />

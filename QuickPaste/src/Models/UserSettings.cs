@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using MahApps.Metro;
+using Microsoft.Win32;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -106,11 +108,44 @@ namespace QuickPaste
             }
         }
 
+        private string _windowaccent;
+        public string WindowAccent
+        {
+            get
+            {
+                return _windowaccent;
+            }
+            set
+            {
+                _windowaccent = value;
+                NotifyPropertyChanged();
+                UpdateTheme();
+            }
+        }
+
+        private bool _isdarktheme;
+        public bool IsDarkTheme
+        {
+            get
+            {
+                return _isdarktheme;
+            }
+            set
+            {
+                _isdarktheme = value;
+                NotifyPropertyChanged();
+                UpdateTheme();
+            }
+        }
+
         public UserSettings()
         {
             HotkeyCombination = HotkeyCombination.Default();
+            WindowAccent = ThemeManager.DetectAppStyle().Item2.Name;
+            IsDarkTheme = true;
             DefaultLanguage = "txt";
             DisplayNotifications = true;
+            NotifyPropertyChanged();
         }
 
         void RegisterStartup(bool value)
@@ -121,6 +156,14 @@ namespace QuickPaste
             else
                 if (regKey.GetValue("QuickPaste") != null)
                     regKey.DeleteValue("QuickPaste");         
+        }
+
+        void UpdateTheme()
+        {
+            if(_windowaccent != null)
+                ThemeManager.ChangeAppStyle(System.Windows.Application.Current,
+                                            ThemeManager.GetAccent(_windowaccent),
+                                            ThemeManager.GetAppTheme(_isdarktheme ? "BaseDark" : "BaseLight" ));
         }
         
         public event PropertyChangedEventHandler PropertyChanged;

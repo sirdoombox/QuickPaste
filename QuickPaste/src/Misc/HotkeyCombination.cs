@@ -4,8 +4,8 @@ namespace QuickPaste
 {
     public class HotkeyCombination
     {
-        public ModifierKeys Modifiers { get; set; }
-        public Key Key { get; set; }
+        public ModifierKeys Modifiers { get; }
+        public Key Key { get; }
 
         public HotkeyCombination(ModifierKeys mods, Key key)
         {
