@@ -3,8 +3,8 @@
 A utility written in C# using WPF designed to make quickly pasting code-snippets online a little more convenient. 
 
 ## Screenshots
-![History](http://i.imgur.com/JopHZkR.png)
 ![Settings](http://i.imgur.com/drrySUP.png)
+![History](http://i.imgur.com/JopHZkR.png)
 
 ## Current Features
 - **Paste History** - *Keep a record of all your previous pastes*
