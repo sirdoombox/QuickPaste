@@ -1,12 +1,5 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Bson;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuickPaste
 {
@@ -43,7 +36,7 @@ namespace QuickPaste
         public Paste(string url)
         {
             PasteURL = url;
-            PastedAt = DateTime.UtcNow;
+            PastedAt = DateTime.Now;
         }
     }
 }

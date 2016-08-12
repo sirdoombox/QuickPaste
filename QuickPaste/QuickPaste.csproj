@@ -103,7 +103,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\Misc\HotkeyCombination.cs" />
-    <Compile Include="src\Misc\ModifierKeyInfo.cs" />
     <Compile Include="src\Misc\UserData.cs" />
     <Compile Include="src\Views\PasteHistoryView.xaml.cs">
       <DependentUpon>PasteHistoryView.xaml</DependentUpon>

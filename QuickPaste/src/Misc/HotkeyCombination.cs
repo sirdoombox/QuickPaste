@@ -1,18 +1,21 @@
-﻿namespace QuickPaste
+﻿using System.Windows.Input;
+
+namespace QuickPaste
 {
     public class HotkeyCombination
     {
-        public bool UseCtrl { get; set; }
-        public bool UseShift { get; set; }
-        public bool UseAlt { get; set; }
-        public string Key { get; set; }
+        public ModifierKeys Modifiers { get; set; }
+        public Key Key { get; set; }
 
-        public HotkeyCombination(bool ctrl, bool shift, bool alt, string key)
+        public HotkeyCombination(ModifierKeys mods, Key key)
         {
-            UseCtrl = ctrl;
-            UseShift = shift;
-            UseAlt = alt;
+            Modifiers = mods;
             Key = key;
+        }
+
+        public static HotkeyCombination Default()
+        {
+            return new HotkeyCombination(ModifierKeys.Control | ModifierKeys.Alt, Key.L);
         }
     }
 }

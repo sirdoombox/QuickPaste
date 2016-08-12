@@ -29,8 +29,7 @@ namespace QuickPaste
         private void KeyboardHook_OnKeyPressed(object sender, KeyPressedArgs e)
         {
             HotkeyCombination combo = UserSettings.HotkeyCombination;
-            Key key = (Key)Enum.Parse(typeof(Key), combo.Key);
-            if (ModifierKeyInfo.CtrlIsDown == combo.UseCtrl && ModifierKeyInfo.ShiftIsDown == combo.UseShift && ModifierKeyInfo.AltIsDown == combo.UseAlt && e.KeyPressed == key)
+            if (Keyboard.Modifiers == UserSettings.HotkeyCombination.Modifiers && e.KeyPressed == UserSettings.HotkeyCombination.Key)
                 Paste();
         }
 

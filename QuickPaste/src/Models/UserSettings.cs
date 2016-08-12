@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace QuickPaste
 {
@@ -107,7 +108,7 @@ namespace QuickPaste
 
         public UserSettings()
         {
-            HotkeyCombination = new HotkeyCombination(true, true, false, "L");
+            HotkeyCombination = HotkeyCombination.Default();
             DefaultLanguage = "txt";
             DisplayNotifications = true;
         }
