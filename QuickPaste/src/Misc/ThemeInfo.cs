@@ -11,11 +11,7 @@ namespace QuickPaste
 
         static ThemeInfo()
         {
-            AvailableAccents = new ReadOnlyCollection<string>(new List<string>{
-                "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald","Teal",
-                "Cyan","Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson",
-                "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe",
-                "Sienna" }.OrderBy(x=>x).ToList());
+            AvailableAccents = new ReadOnlyCollection<string>(ThemeManager.Accents.Select(x => x.Name).OrderBy(x=>x).ToList());
         }
     }
 }

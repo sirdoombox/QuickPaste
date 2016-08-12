@@ -37,6 +37,7 @@ namespace QuickPaste
                 shortcutText.Append("Alt+");            
             shortcutText.Append(key.ToString());
             ((TextBox)sender).Text = shortcutText.ToString();
+            Keyboard.ClearFocus();
         }
     }
 }

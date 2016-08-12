@@ -7,39 +7,86 @@
              xmlns:local="clr-namespace:QuickPaste"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Margin="10">
+    <Grid>
         <Grid.DataContext>
-                <local:UserSettingsViewModel/>
+            <local:UserSettingsViewModel/>
         </Grid.DataContext>
         <Grid.Resources>
             <local:HotkeyStringToHotkeyCombinationConverter x:Key="hotkeyConverter"/>
+            <Style x:Key="TitleTextBoxStyle"
+                   TargetType="TextBlock">
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="0,-5,0,5"/>
+            </Style>
+            <Style TargetType="Border">
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}"/>
+            </Style>
         </Grid.Resources>
-        <StackPanel DataContext="{Binding Path=Settings, Mode=TwoWay}">
-            <CheckBox IsChecked="{Binding Path=MinimiseToSystemTray}"
-                      Content="Minimise to system tray"/>
-            <CheckBox IsChecked="{Binding Path=OpenOnWindowsStart}"
-                      Content="Open on Windows Startup?"/>
-            <TextBox PreviewKeyDown="TextBox_PreviewKeyDown"
-                     Text="{Binding Path=HotkeyCombination, Converter={StaticResource hotkeyConverter}}"/>
-            <CheckBox IsChecked="{Binding Path=OpenURLOnUpload}" 
-                      Content="Open URL on upload"/>
-            <CheckBox IsChecked="{Binding Path=CopyURLOnUpload}" 
-                      Content="Copy URL to clipboard on upload"/>
-            <CheckBox IsChecked="{Binding Path=DisplayNotifications}"
-                      Content="Show post-upload notifications"/>
-            <TextBlock Text="Default Language"
-                       HorizontalAlignment="Center"/>
-            <ComboBox x:Name="cboLangs" 
-                      SelectedValue="{Binding Path=DefaultLanguage}" 
-                      SelectedValuePath="Value"
-                      DisplayMemberPath="Key"/>
-            <TextBlock Text="Window Accent"
-                       HorizontalAlignment="Center"/>
-            <ComboBox x:Name="cboAccents"
-                      SelectedValue="{Binding Path=WindowAccent}"/>
-            <Controls:ToggleSwitch IsChecked="{Binding Path=IsDarkTheme}"
-                                   OnLabel="Dark Theme"
-                                   OffLabel="Light Theme"/>
-        </StackPanel>
+        <ScrollViewer>
+            <Grid DataContext="{Binding Path=Settings, Mode=TwoWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <Border Grid.Row="0">
+                    <StackPanel Margin="10">
+                        <TextBlock Style="{StaticResource TitleTextBoxStyle}">General</TextBlock>
+                        <CheckBox IsChecked="{Binding Path=MinimiseToSystemTray}"
+                                  Content="Minimise to system tray"/>
+                        <CheckBox IsChecked="{Binding Path=OpenOnWindowsStart}"
+                                  Content="Open when Windows starts"
+                                  Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1">
+                    <StackPanel Margin="10">
+                        <TextBlock Style="{StaticResource TitleTextBoxStyle}">Pasting</TextBlock>
+                        <TextBox PreviewKeyDown="TextBox_PreviewKeyDown"
+                                 Text="{Binding Path=HotkeyCombination, Converter={StaticResource hotkeyConverter}}"
+                                 Controls:TextBoxHelper.Watermark="Paste Hotkey"
+                                 Controls:TextBoxHelper.UseFloatingWatermark="True"/>
+                        <CheckBox IsChecked="{Binding Path=OpenURLOnUpload}" 
+                                  Content="Open URL on upload"
+                                  Margin="0,5,0,0"/>
+                        <CheckBox IsChecked="{Binding Path=CopyURLOnUpload}" 
+                                  Content="Copy URL to clipboard on upload"
+                                  Margin="0,5,0,0"/>
+                        <CheckBox IsChecked="{Binding Path=DisplayNotifications}"
+                                  Content="Show post-upload notifications"
+                                  Margin="0,5,0,0"/>
+                        <TextBlock Text="Default Language"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,5,0,0"/>
+                        <ComboBox x:Name="cboLangs" 
+                                  SelectedValue="{Binding Path=DefaultLanguage}" 
+                                  SelectedValuePath="Value"
+                                  DisplayMemberPath="Key"
+                                  Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+                
+                <Border Grid.Row="2">
+                    <StackPanel Margin="10">
+                        <TextBlock Style="{StaticResource TitleTextBoxStyle}">Theme</TextBlock>
+                        <TextBlock Text="Accents" HorizontalAlignment="Center"/>
+                        <ComboBox x:Name="cboAccents" 
+                                  SelectedValue="{Binding Path=WindowAccent}"
+                                  Margin="0,5,0,0"/>
+                        <Controls:ToggleSwitch IsChecked="{Binding Path=IsDarkTheme}"
+                                               OnLabel="Dark Theme"
+                                               OffLabel="Light Theme"
+                                               Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>
