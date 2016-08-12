@@ -9,7 +9,7 @@ A utility written in C# using WPF designed to make quickly pasting code-snippets
 - **Custom Hotkey Binding**  - *Define your own key combination for quick-pasting*
 
 ## Planned Features
-- **Paste Notes** - Quickly make a note in your paste history reminding you what a paste contains - Make it easier to find in the future
+- **Paste Notes** - *Quickly make a note in your paste history reminding you what a paste contains - Make it easier to find in the future*
 - **Paste Sorting & Searching** - *Sort and search through the dates & note contents to make it even more convenient*
 - **Multi Hotkeys** - *Set up multiple hotkeys for seperate languages to make working with multiple languages a little easier*
 - **Mutiple Upload Locations** - *Send your pastes wherever you like*
