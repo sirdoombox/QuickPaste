@@ -27,7 +27,7 @@ namespace QuickPaste
 
         public void AddPaste(string url)
         {
-            Pastes.Add(new Paste(url));
+            Pastes.Insert(0, new Paste(url));
         }
     }
 }
