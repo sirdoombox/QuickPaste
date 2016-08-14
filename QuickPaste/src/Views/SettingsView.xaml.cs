@@ -1,5 +1,5 @@
-﻿using MahApps.Metro;
-using System.Text;
+﻿using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -38,6 +38,30 @@ namespace QuickPaste
             shortcutText.Append(key.ToString());
             ((TextBox)sender).Text = shortcutText.ToString();
             Keyboard.ClearFocus();
+        }
+
+        private bool IsTextAllowed(string text)
+        { 
+            return !new Regex("[^0-9]+").IsMatch(text);
+        }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        private void TextBox_Pasting(object sender, System.Windows.DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(string)))
+                if (!IsTextAllowed((string)e.DataObject.GetData(typeof(string))))
+                    e.CancelCommand();                           
+            else e.CancelCommand();        
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Keyboard.ClearFocus();
         }
     }
 }

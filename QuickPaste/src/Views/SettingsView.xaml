@@ -12,7 +12,8 @@
             <local:UserSettingsViewModel/>
         </Grid.DataContext>
         <Grid.Resources>
-            <local:HotkeyStringToHotkeyCombinationConverter x:Key="hotkeyConverter"/>
+            <local:HotkeyStringToHotkeyCombinationConverter x:Key="HotkeyConverter"/>
+            <local:StringToIntConverter x:Key="StringToIntConverter"/>
             <Style x:Key="TitleTextBoxStyle"
                    TargetType="TextBlock">
                 <Setter Property="FontWeight" Value="Bold"/>
@@ -50,9 +51,17 @@
                     <StackPanel Margin="10">
                         <TextBlock Style="{StaticResource TitleTextBoxStyle}">Pasting</TextBlock>
                         <TextBox PreviewKeyDown="TextBox_PreviewKeyDown"
-                                 Text="{Binding Path=HotkeyCombination, Converter={StaticResource hotkeyConverter}}"
+                                 KeyDown="TextBox_KeyDown"
+                                 Text="{Binding Path=HotkeyCombination, Converter={StaticResource HotkeyConverter}}"
                                  Controls:TextBoxHelper.Watermark="Paste Hotkey"
                                  Controls:TextBoxHelper.UseFloatingWatermark="True"/>
+                        <TextBox Text="{Binding Path=MaxPasteHistoryCount, Converter={StaticResource StringToIntConverter}}"
+                                 Controls:TextBoxHelper.Watermark="Max Paste History Count"
+                                 Controls:TextBoxHelper.UseFloatingWatermark="True"
+                                 PreviewTextInput="TextBox_PreviewTextInput"
+                                 KeyDown="TextBox_KeyDown"
+                                 DataObject.Pasting="TextBox_Pasting"
+                                 Margin="0,5,0,0"/>
                         <CheckBox IsChecked="{Binding Path=OpenURLOnUpload}" 
                                   Content="Open URL on upload"
                                   Margin="0,5,0,0"/>

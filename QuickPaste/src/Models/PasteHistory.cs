@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace QuickPaste
 {
@@ -27,6 +24,8 @@ namespace QuickPaste
 
         public void AddPaste(string url)
         {
+            if (MainWindow.UserSettings.MaxPasteHistoryCount < Pastes.Count)
+                Pastes.RemoveAt(Pastes.Count - 1);
             Pastes.Insert(0, new Paste(url));
         }
     }

@@ -1,9 +1,7 @@
 ﻿using MahApps.Metro;
 using Microsoft.Win32;
-using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 
 namespace QuickPaste
 {
@@ -94,6 +92,20 @@ namespace QuickPaste
             }
         }
 
+        private int _maxpastehistorycount;
+        public int MaxPasteHistoryCount
+        {
+            get
+            {
+                return _maxpastehistorycount;
+            }
+            set
+            {
+                _maxpastehistorycount = value > 1000 ? 1000 : value ;
+                NotifyPropertyChanged();
+            }
+        }
+
         private string _defaultlanguage;
         public string DefaultLanguage
         {
@@ -145,6 +157,7 @@ namespace QuickPaste
             IsDarkTheme = true;
             DefaultLanguage = "txt";
             DisplayNotifications = true;
+            MaxPasteHistoryCount = 250;
             NotifyPropertyChanged();
         }
 

@@ -1,5 +1,4 @@
-﻿using MahApps.Metro.Controls.Dialogs;
-using System;
+﻿using System;
 using System.Windows.Input;
 
 namespace QuickPaste
