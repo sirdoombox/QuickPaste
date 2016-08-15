@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:QuickPaste"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -27,10 +28,16 @@
                 <Setter Property="Margin" Value="10"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}"/>
             </Style>
+            <ObjectDataProvider x:Key="UploadLocationEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="local:UploadLocation"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
         </Grid.Resources>
         <ScrollViewer>
             <Grid DataContext="{Binding Path=Settings, Mode=TwoWay}">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -81,11 +88,25 @@
                                   Margin="0,5,0,0"/>
                     </StackPanel>
                 </Border>
-                
+
                 <Border Grid.Row="2">
                     <StackPanel Margin="10">
+                        <TextBlock Style="{StaticResource TitleTextBoxStyle}">Paste Upload</TextBlock>
+                        <TextBlock Text="Upload Location" HorizontalAlignment="Center"/>
+                        <ComboBox ItemsSource="{Binding Source={StaticResource UploadLocationEnum}}"
+                                  SelectedValue="{Binding Path=UploadLocation}"
+                                  Margin="0,5,0,0"/>
+                        <TextBox Text="{Binding Path=PastebinDevKey}"
+                                 Controls:TextBoxHelper.Watermark="Pastebin Developer Key"
+                                 Controls:TextBoxHelper.UseFloatingWatermark="True"
+                                 Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+                
+                <Border Grid.Row="3">
+                    <StackPanel Margin="10">
                         <TextBlock Style="{StaticResource TitleTextBoxStyle}">Theme</TextBlock>
-                        <TextBlock Text="Accents" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Accent" HorizontalAlignment="Center"/>
                         <ComboBox x:Name="cboAccents" 
                                   SelectedValue="{Binding Path=WindowAccent}"
                                   Margin="0,5,0,0"/>

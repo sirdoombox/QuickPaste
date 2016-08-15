@@ -7,6 +7,7 @@ namespace QuickPaste
 {
     public class UserSettings : INotifyPropertyChanged
     {
+        #region General Settings
         private bool _minimisetosystemtray;
         public bool MinimiseToSystemTray
         {
@@ -35,7 +36,9 @@ namespace QuickPaste
                 NotifyPropertyChanged();
             }
         }
+        #endregion
 
+        #region Paste Settings
         private HotkeyCombination _hotkeycombination;
         public HotkeyCombination HotkeyCombination
         {
@@ -119,7 +122,39 @@ namespace QuickPaste
                 NotifyPropertyChanged();
             }
         }
+        #endregion
 
+        #region Paste Upload Setttings
+        private UploadLocation _uploadlocation;
+        public UploadLocation UploadLocation
+        {
+            get
+            {
+                return _uploadlocation;
+            }
+            set
+            {
+                _uploadlocation = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private string _pastebindevkey;
+        public string PastebinDevKey
+        {
+            get
+            {
+                return _pastebindevkey;
+            }
+            set
+            {
+                _pastebindevkey = value;
+                NotifyPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region Theme Settings
         private string _windowaccent;
         public string WindowAccent
         {
@@ -149,6 +184,7 @@ namespace QuickPaste
                 UpdateTheme();
             }
         }
+        #endregion
 
         public UserSettings()
         {
@@ -158,6 +194,7 @@ namespace QuickPaste
             DefaultLanguage = "txt";
             DisplayNotifications = true;
             MaxPasteHistoryCount = 250;
+            UploadLocation = UploadLocation.Hastebin;
             NotifyPropertyChanged();
         }
 
@@ -166,8 +203,7 @@ namespace QuickPaste
             var regKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
             if (value)
                 regKey.SetValue("QuickPaste", System.Reflection.Assembly.GetExecutingAssembly().Location);
-            else
-                if (regKey.GetValue("QuickPaste") != null)
+            else if (regKey.GetValue("QuickPaste") != null)
                     regKey.DeleteValue("QuickPaste");         
         }
 

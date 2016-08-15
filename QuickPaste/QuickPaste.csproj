@@ -79,7 +79,9 @@
     <Compile Include="src\Commands\ClearHistoryCommand.cs" />
     <Compile Include="src\Converters\StringToIntConverter.cs" />
     <Compile Include="src\Misc\AvailableLanguages.cs" />
+    <Compile Include="src\Misc\PasteUploader.cs" />
     <Compile Include="src\Misc\ThemeInfo.cs" />
+    <Compile Include="src\Misc\UploadLocation.cs" />
     <Compile Include="src\Models\Paste.cs" />
     <Compile Include="src\Models\PasteHistory.cs" />
     <Compile Include="src\ViewModels\PasteHistoryViewModel.cs" />
@@ -105,7 +107,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="src\Misc\HotkeyCombination.cs" />
+    <Compile Include="src\Models\HotkeyCombination.cs" />
     <Compile Include="src\Misc\UserData.cs" />
     <Compile Include="src\Views\PasteHistoryView.xaml.cs">
       <DependentUpon>PasteHistoryView.xaml</DependentUpon>
