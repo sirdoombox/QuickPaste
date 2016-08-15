@@ -14,14 +14,14 @@ namespace QuickPaste
             switch (us.UploadLocation)
             {
                 case UploadLocation.Hastebin:
-                    return Hastebin(code);
+                    return Hastebin(code, us.DefaultLanguage);
                 case UploadLocation.Pastebin:
                     return Pastebin(code, us.PastebinDevKey);
             }
             return null;
         }
 
-        static string Hastebin(string code)
+        static string Hastebin(string code, string langExt)
         {
             byte[] bytes = new ASCIIEncoding().GetBytes(code);
             var req = System.Net.WebRequest.Create("http://hastebin.com/documents");
@@ -39,7 +39,7 @@ namespace QuickPaste
                 using (var rdr = new StreamReader(resp.GetResponseStream()))
                 {
                     Dictionary<string, string> hr = JsonConvert.DeserializeObject<Dictionary<string, string>>(rdr.ReadToEnd());
-                    string url = $"http://hastebin.com/{hr["key"]}";
+                    string url = $"http://hastebin.com/{hr["key"]}.{langExt}";
                     return url;
                 }
             }

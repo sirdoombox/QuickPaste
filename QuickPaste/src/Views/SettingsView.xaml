@@ -99,7 +99,8 @@
                         <TextBox Text="{Binding Path=PastebinDevKey}"
                                  Controls:TextBoxHelper.Watermark="Pastebin Developer Key"
                                  Controls:TextBoxHelper.UseFloatingWatermark="True"
-                                 Margin="0,5,0,0"/>
+                                 Margin="0,5,0,0"
+                                 KeyDown="TextBox_KeyDown"/>
                     </StackPanel>
                 </Border>
                 
